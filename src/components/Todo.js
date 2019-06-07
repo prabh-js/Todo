@@ -9,6 +9,10 @@ class Todo extends React.Component {
             items: [],
             text: ''
         }
+        this.inputRef = React.createRef();
+    }
+    componentDidMount() {
+        this.inputRef.current.focus();
     }
     handleOnChange = (event) => {
        event.persist() // to set state asynchronously
@@ -22,6 +26,7 @@ class Todo extends React.Component {
             items:  [...this.state.items, this.state.text],
             text: ''
         });
+        this.inputRef.current.focus();
     }
     renderList = () => {
         return (
@@ -40,6 +45,7 @@ class Todo extends React.Component {
                 type="text"
                 value={this.state.text}
                 placeholder="Type todo's"
+                ref={this.inputRef}
                 onChange={(e)=>this.handleOnChange(e)}
                 />
                 <Button
